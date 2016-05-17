@@ -1,2 +1,0 @@
-The tasks for this week can be found here:
-https://github.com/HackBulgaria/Programming101-Java/tree/master/week01
