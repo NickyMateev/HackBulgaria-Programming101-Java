@@ -1,0 +1,5 @@
+# Tasks for the week:
+
+- [x] [Monday](https://github.com/HackBulgaria/Programming101-Java/tree/master/week01/1.Monday)
+- [x] [Wednesday](https://github.com/HackBulgaria/Programming101-Java/tree/master/week01/2.Wednesday)
+- [ ] [Friday](https://github.com/HackBulgaria/Programming101-Java/tree/master/week01/3.Friday)
