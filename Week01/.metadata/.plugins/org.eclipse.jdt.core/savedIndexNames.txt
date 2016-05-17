@@ -1,4 +1,0 @@
-INDEX VERSION 1.127+/home/nickym/Documents/Java projects/HackBulgaria Programming101-Java/Week01/.metadata/.plugins/org.eclipse.jdt.core
-3244605481.index
-693984598.index
-68731234.index
