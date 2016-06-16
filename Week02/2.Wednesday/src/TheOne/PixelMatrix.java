@@ -17,15 +17,15 @@ public class PixelMatrix {
 				matrix[i][j] = new Pixel();
 	}
 	
-	public PixelMatrix(Pixel[][] otherMatrix){
+	public PixelMatrix(Pixel[][] pixels){
 		
-		rows = otherMatrix.length;
-		cols = otherMatrix[0].length;
+		rows = pixels.length;
+		cols = pixels[0].length;
 		
 		matrix = new Pixel[rows][cols];
 		for (int i = 0; i < rows; i++)
 			for (int j = 0; j < cols; j++)
-				matrix[i][j] = new Pixel(otherMatrix[i][j]);
+				matrix[i][j] = new Pixel(pixels[i][j]);
 				
 	}	
 	
