@@ -42,7 +42,7 @@ public class MyHashMap<K, V> {
 	// ************************
 
 	public MyHashMap() {
-		capacity = 16;
+		capacity = 16; // initial capacity is 16
 		buckets = new ArrayList<>(capacity);
 		init(buckets, capacity);
 	}
