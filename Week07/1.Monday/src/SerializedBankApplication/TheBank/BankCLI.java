@@ -1,11 +1,6 @@
 package SerializedBankApplication.TheBank;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.util.Scanner;
 
 import SerializedBankApplication.BankAccount.*;
@@ -20,7 +15,7 @@ public class BankCLI {
 	}
 
 	private static Bank loadBank(){
-		
+
 		Bank bank = null;
 		try(ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream("bankLog.ser"))){
 			bank = (Bank) inputStream.readObject();
@@ -33,13 +28,13 @@ public class BankCLI {
 			System.out.println("New bank created.");
 			return new Bank();
 		}
-		
+
 		System.out.println("Bank loaded from bankLog.ser");
 		return bank;
 	}
-	
+
 	private static void saveBank(Bank bank){
-		
+
 		try(ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream("bankLog.ser"))){
 			os.writeObject(bank);
 		} catch (IOException ex) {

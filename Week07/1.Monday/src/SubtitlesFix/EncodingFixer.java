@@ -2,20 +2,16 @@ package SubtitlesFix;
 
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
+import java.io.*;
 import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.nio.file.*;
 
 public class EncodingFixer {
-	
+
 	public static void fixEncoding(Path path) throws IOException {
-		
+
 		Path backup = createBackup(path);
-		
+
 		StringBuilder sb = new StringBuilder();
 		// reading the file:
 		Charset charset = Charset.forName("Windows-1251");
@@ -30,7 +26,7 @@ public class EncodingFixer {
 			Files.delete(backup);
 			return;
 		}
-		
+
 		// writing the file:
 		charset = Charset.forName("UTF-8");
 		try(BufferedWriter writer = Files.newBufferedWriter(path, charset)){
@@ -38,15 +34,15 @@ public class EncodingFixer {
 		} catch (IOException ex) {
 			Files.copy(backup, path, REPLACE_EXISTING); // in case of exception -> replace original with backup
 		}
-		
+
 		Files.delete(backup);
 	}
-	
+
 	private static Path createBackup(Path original) throws IOException{
-		
+
 		Path backup = Files.createTempFile(Paths.get("."), "tempFile", ".srt");
 		Files.copy(original, backup, REPLACE_EXISTING);
-		
+
 		return backup;
 	}
 

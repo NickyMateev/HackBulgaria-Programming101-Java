@@ -1,14 +1,9 @@
 package SerializedBankApplication.TheBank;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-import SerializedBankApplication.BankAccount.BankAccount;
-import SerializedBankApplication.BankAccount.ForbiddenWithdrawException;
-import SerializedBankApplication.BankAccount.InsufficientFundsException;
-import SerializedBankApplication.BankAccount.NonExistingBankAccountException;
-import SerializedBankApplication.BankAccount.Person;
+import SerializedBankApplication.BankAccount.*;
 
 public class Bank implements Serializable {
 
@@ -79,15 +74,15 @@ public class Bank implements Serializable {
 			throw new NonExistingBankAccountException("ERROR: Missing bank account.");
 		}
 	}
-	
+
 	public double calculateAmount(int bankAccountId, int numberOfMonths) throws NonExistingBankAccountException{
-		
+
 		for (BankAccount bankAccount : accounts) {
 			if(bankAccount.getBankAccountId() == bankAccountId){
-				
+
 				double balance = bankAccount.getBalance();
 				double interest = bankAccount.getInterestRate();
-				
+
 				if(bankAccount.IsComplexInterest()){
 					return balance * Math.pow(1 + interest, numberOfMonths);
 				} else {
@@ -95,7 +90,7 @@ public class Bank implements Serializable {
 				}
 			}
 		}
-		
+
 		throw new NonExistingBankAccountException("ERROR: Missing bank account.");
 	}
 }

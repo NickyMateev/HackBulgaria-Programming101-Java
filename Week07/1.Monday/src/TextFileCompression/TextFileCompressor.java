@@ -1,13 +1,8 @@
 package TextFileCompression;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.*;
+import java.nio.file.*;
+import java.util.*;
 
 public class TextFileCompressor {
 
@@ -138,7 +133,7 @@ public class TextFileCompressor {
 
 			result.append(' ');
 		}
-		
+
 	}
 
 	private Path getDecompressedPath(Path path) {
