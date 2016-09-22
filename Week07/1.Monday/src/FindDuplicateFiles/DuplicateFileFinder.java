@@ -12,13 +12,13 @@ import UtilityMethods.FileUtils;
 public class DuplicateFileFinder {
 
 	public static final long MAX_FILE_SIZE = 512000; // in bytes; so 512000B = 512KB
-	private int groupCount = 1;
-	private int duplicateFileCount = 1;
+	private int groupCount = 0;
+	private int duplicateFileCount = 0;
 	private long potentialFreeSpace = 0;
 
 	public void findDuplicates(Path path) throws IOException{
 
-		groupCount = 1; // safety measure, in case of multiple searches
+		resetCounters(); // safety measure, in case of multiple searches
 
 		Map<Long, ArrayList<Path>> filesMap = new HashMap<Long, ArrayList<Path>>(); // will store Size-Paths pairs for files
 		traverseFileTree(path, filesMap);
@@ -27,7 +27,7 @@ public class DuplicateFileFinder {
 			printDuplicates(entry.getValue());
 		}
 
-		System.out.format("%d groups of duplications found.%n", groupCount - 1);
+		System.out.format("%d groups of duplications found.%n", groupCount);
 		System.out.format("A total of %d files can be deleted, freeing up %dKB(%dB) disk space.%n", duplicateFileCount, potentialFreeSpace / 1000, potentialFreeSpace);
 	}
 
@@ -47,7 +47,8 @@ public class DuplicateFileFinder {
 			}
 
 			pathList.removeAll(stack);
-			if(stack.size() > 1){ // i.e. there are duplicates in this pathList
+			if(stack.size() > 1){ // i.e. duplicates were found in this pathList
+        groupCount++;
 				duplicateFileCount += stack.size() - 1;
 				potentialFreeSpace += (stack.size() - 1) * Files.size(currentFile);
 
@@ -56,8 +57,6 @@ public class DuplicateFileFinder {
 					System.out.println(stack.pop());
 				}
 				System.out.format("%n");
-
-				groupCount++;
 			}
 		}
 	}
@@ -111,6 +110,12 @@ public class DuplicateFileFinder {
 
 	private boolean isBrokenLink(Path path) throws IOException{
 		return !Files.exists(Files.readSymbolicLink(path));
+	}
+
+	private void resetCounters(){
+		int groupCount = 0;
+		int duplicateFileCount = 0;
+		long potentialFreeSpace = 0;
 	}
 
 }
