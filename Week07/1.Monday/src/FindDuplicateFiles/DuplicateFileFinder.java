@@ -24,6 +24,9 @@ public class DuplicateFileFinder {
 		traverseFileTree(path, filesMap);
 
 		for (Map.Entry<Long, ArrayList<Path>> entry : filesMap.entrySet()) {
+			if(entry.getValue().size() == 1){ // can't have duplicates in a list conatining a single element
+				continue;
+			}
 			printDuplicates(entry.getValue());
 		}
 
